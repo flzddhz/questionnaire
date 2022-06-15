@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.questionnaire.dao.AccountMapper">
+    <select id="queryAccount" parameterType="Map" resultType="com.example.questionnaire.entity.Account">
+        select * from account where customer like "%"#{custName}"%" order by id desc limit #{page1},#{page2}
+    </select>
+    <select id="accCount" parameterType="Map" resultType="int">
+        select count(1) from account where customer like "%"#{custName}"%"
+    </select>
+</mapper>
