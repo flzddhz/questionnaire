@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{index.title}">崇达客户满意度调研</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script>
+        $(function () {
+            $("[name='department']").click(function () {
+                // alert($("#qtdepartment").attr("checked"));
+                if ($("#qtdepartment:checked").val() == '其他') {
+                    $("#qtde").show();
+                } else {
+                    $("#qtde").val("");
+                    $("#qtde").hide();
+                }
+            });
+
+            $(".table1 .che").click(function () {
+                $(this).parent().siblings("td").children(".che").attr("checked", false);
+            });
+            $(".table2 .che").click(function () {
+                $(this).parent().parent().siblings("tr").find(".che").attr("checked", false);
+            });
+        });
+        function save() {
+            if($("#costomer_name").val() == null || $("#costomer_name").val().trim().length==0){
+                alert("所在公司不能为空哦！");
+            }
+        }
+    </script>
+    <!--    <script type="text/javascript" src="js/index.js"></script>-->
+</head>
+<body>
+    <div class="border1">
+        <div><!-- 标题 -->
+            <h1 id="title1">崇达客户满意度调研</h1>
+            <h2 id="title2">Suntak Customer Satisfaction Survey</h2>
+            <p style="text-align: center;">
+                <a th:href="@{/index.html(l='zh_CN')}">中文</a>
+                <a th:href="@{/index.html(l='en_US')}">English</a>
+            </p>
+        </div>
+
+        <div><!-- 导言 -->
+            <br/><br/><br/>
+            <h3><strong th:text="#{index.dyjy}">尊敬的先生/小姐：</strong></h3>
+            <h3><strong th:text="#{index.dyzw}">        尊敬的客户，感谢您参与崇达技术股份有限公司的市场调查。为了解客户对我司产品和服务的满意度，
+                以及广大客户的需求，请您填写下面调查问卷，我们希望在此基础上更好的为您提供有针对性的服务支持。</strong></h3>
+        </div>
+
+        <div> <!-- from表单 -->
+            <br/><br/>
+            <form id="from" action="insertQu" method="post">
+                <div> <!-- 所在的公司及部门 -->
+                    <h4 class="cost">
+                        <strong class="costt" th:text="#{index.gsmc}">您所在公司的名称：</strong><span class="costs"><input id="costomer_name" class="costi"
+                                                                                                                   name="costomer_name" required/></span>
+                    </h4>
+                    <p style="height:30px;">
+                        <strong th:text="#{index.szbm}">Q1. 您所在的部门：</strong>
+                        <br/>
+                        <input type="radio" value="公司管理" name='department'><span th:text="#{index.gsgl}">公司管理</span>
+                        <input type="radio" value="采购" name='department'><span th:text="#{index.cg}">采购</span>
+                        <input type="radio" value="技术" name='department'><span th:text="#{index.js}">技术</span>
+                        <input type="radio" value="制造" name='department'><span th:text="#{index.zz}">制造</span>
+                        <input type="radio" value="市场/销售" name='department'><span th:text="#{index.scxs}">市场/销售</span>
+                        <input type="radio" value="其他" id='qtdepartment' name='department'><span th:text="#{index.qt}">其他</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                            class="qt" type="text"
+                            name='department' id="qtde"/>
+                    </p>
+                </div>
+
+                <div>   <!--  品牌形象与公司实力 -->
+                    <br/><br/>
+                    <p><strong th:text="#{index.ppxxygssl}">品牌形象与公司实力</strong></p>
+                    <P th:text="#{index.Q2}">Q2. 下面是一些关于品牌形象与公司实力的描述，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数
+                        来表达您的<strong>认同</strong>程度（横向单选），10表示完全同意，1表示完全不同意。</P>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.ppxx}">品牌形象</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.zskxd}">具有真实可信的行业背景</td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_industry_backround" value="0"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">02</td>
+                            <td th:text="#{index.gnlx}">是国内领先的中、高端线路板供应商</td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_upscale" value="0"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">03</td>
+                            <td th:text="#{index.sqqzm}">是全球知名的线路板服务商</td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_well_known" value="0"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">04</td>
+                            <td th:text="#{index.ngzzkhlc}">能够站在客户的立场思考问题</td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_costomer_position" value="0"/></td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <th colspan="2" th:text="#{index.gssl}">公司实力</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">05</td>
+                            <td th:text="#{index.jywsd}">具有完善的生产和品管体系</td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_production_quality_control" value="0"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">06</td>
+                            <td th:text="#{index.jylhdkz}">具有良好的制程控制能力</td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_control_ability" value="0"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">07</td>
+                            <td th:text="#{index.tsgyd}">特殊工艺的生产能力完全满足贵司要求</td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_meet_requirements" value="0"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">08</td>
+                            <td th:text="#{index.jygnlxd}">具有国内领先的线路板新工艺的研发能力</td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development" value="0"/></td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+                <div><!-- 第一部分 客户总体满意度 -->
+                    <br/><br/>
+                    <h2 th:text="#{index.dybf}">第一部分 客户总体满意度</h2>
+                    <p th:text="#{index.dybfx}">下面，我们来谈一下您对于崇达在总体方面的看法吧</p>
+                    <p th:text="#{index.Q3}">Q3. 综合考虑产品、技术、服务、合作关系等各方面，您对崇达的<strong>总体满意程度</strong>如何？您可以用1-10的评分标准来评价，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.ztmyd}">总体满意度</td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_satisfaction" value="0"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q4}">Q4. 综合考虑所有因素，如果其他企业或合作伙伴向您咨询，您在多大程度上会向他们<strong>推荐崇达</strong>呢？您可以用1-10的评分标准来评价，10是肯定会，1是肯定不会。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.tjz}">推荐值</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.tjz}">推荐值</td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_recommended_value" value="0"/></td>
+                        </tr>
+                    </table>
+
+
+                    <br/><br/>
+                    <p th:text="#{index.Q5}">Q5. 在接下来的一年里，您认为贵公司针对崇达的<strong>采购量</strong>会有所变化么？您可以用1-10的评分标准来评价，10是继续采购，1是不再采购。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.zcd}">忠诚度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.zcd}">忠诚度</td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_loyalty" value="0"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q6}">Q6. 具体而言，贵公司怎样评价崇达各个工厂在<strong>产品外观</strong>方面的表现呢？您可以用1-10的评分标准来评价，10是非常满意，1是非常不满意。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.cpwg}">产品外观</td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_product_appearance" value="0"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q7}">Q7. 具体而言，贵公司怎样评价崇达各个工厂在<strong>产品质量可靠性</strong>方面的表现呢？您可以用1-10的评分标准来评价，10是非常满意，1是非常不满意。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.kkx}">可靠性</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.cpzlkkx}">产品质量可靠性</td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_reliability" value="0"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q8}">Q8. 具体而言，贵公司怎样评价崇达各个工厂在<strong>产品品质稳定性</strong>方面的表现呢？您可以用1-10的评分标准来评价，10是非常满意，1是非常不满意。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.wdx}">稳定性</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result2" th:text="#{index.sbq}">说不清</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.cppzwdx}">产品品质稳定性</td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_quality_stability" value="0"/></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div><!-- 第二部分 各商业过程的客户满意度评估 -->
+                    <br/><br/>
+                    <h2 th:text="#{index.debf}">第二部分 各商业过程的客户满意度评估</h2>
+                    <p th:text="#{index.debfx}">在与崇达的合作过程中，您对崇达在A. 新产品/材料开发；B. 售前技术服务；C. 销售服务；D. 供货环节；E.
+                        售后服务；各个方面的评价如何？10表示非常满意，1表示无法接受，请根据您的满意程度选择相应的数字。</p>
+                    <h3 th:text="#{index.A}">A. 新产品/材料开发</h3>
+                    <p th:text="#{index.Q9}">Q9.
+                        下面是一些关于新产品/材料开发方面的描述，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。</p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.xcpclkf}">新产品/材料开发的总体满意度</td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_development" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q10}">Q10.
+                        下面是一些关于新产品/材料开发方面的具体描述，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数来表达您的满意程度。，10是非常满意，1是无法接受。</p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.xcpclsd}">新产品/材料开发的速度和效率</td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_speed" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">02</td>
+                            <td th:text="#{index.xcpclxx}">新产品/材料信息或资料传递方面的工作（比如信息传递的及时性和准确性是否有助于贵公司了解崇达的新产品信息等等）</td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_information_accuracy" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">03</td>
+                            <td th:text="#{index.xcpcldxq}">新产品/材料对需求的满足程度</td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_material_satisfaction" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <h3 th:text="#{index.B}">B. 售前技术服务</h3>
+                    <p th:text="#{index.Bx}">在贵公司正式采购产品之前，通常会需要有一个技术交流、送样和样机匹配确认的过程。我们称这个过程为售前技术服务。下面我们想了解您归于崇达在这个环节表现的评价</p>
+                    <p th:text="#{index.Q11}">Q11. 按照您和崇达的接触经验，请问您对它在<strong>售前技术服务</strong>各方面表现的满意程度如何呢？您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.sqjsfw}">售前技术服务的总体满意度</td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="10"/>
+                            </td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_overall_befSales_service" value="-1"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q12}">Q12. 下面是一些关于<strong>售前技术服务</strong>方面的具体描述，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.cpjsjlpl}">产品技术交流的频率</td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_ac_frequency" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">02</td>
+                            <td th:text="#{index.zqljggs}">正确了解贵公司的产品开发需求</td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_development_requirements" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">03</td>
+                            <td th:text="#{index.dggscpkf}">对贵公司产品开发过程中相关需求的响应速度</td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_response_speed" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">04</td>
+                            <td th:text="#{index.cdjjcph}">崇达解决产品和技术问题的时效性</td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_timeliness" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">05</td>
+                            <td th:text="#{index.jsxggs}">及时向贵公司提供相关的产品和技术资料</td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_technical_information" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <h3 th:text="#{index.C}">C. 销售服务</h3>
+                    <p th:text="#{index.Cx}">接下来，我们想了解您对崇达在销售服务方面的评价</p>
+                    <p th:text="#{index.Q13}">Q13. 按照您和崇达的接触经验，请问您对它在<strong>销售服务</strong>各方面表现的满意程度如何呢？您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.xsfwd}">销售服务的总体满意度</td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_sales_satisfaction" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q14}">
+                        Q14. 下面是一些关于<strong>销售服务</strong>方面的具体描述，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.zqljggsdsjxq}">正确了解贵公司的实际需求</td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_actual_demand" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">02</td>
+                            <td th:text="#{index.dggsdxq}">对贵公司的需求的响应度和及时性</td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_demand_responsiveness" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">03</td>
+                            <td th:text="#{index.dywwtd}">对业务问题的处理能力</td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_processing_capacity" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">04</td>
+                            <td th:text="#{index.xsrygtbd}">销售人员沟通表达能力</td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_expressive_ability" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">05</td>
+                            <td th:text="#{index.ggsdcdgc}">贵公司到崇达工厂，销售人员接待能力</td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reception_capacity" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">06</td>
+                            <td th:text="#{index.bjhlx}">报价合理性/规范性</td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_rationality_quotation" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <h3 th:text="#{index.D}">D. 供货环节</h3>
+                    <p th:text="#{index.Dx}">
+                        下面我想和您谈一下有关崇达供货服务方面的一些问题。我们这里说的供货服务，主要包括两个方面，一方面是在崇达正式出货前，与订单相关的一些内容，比如对贵公司订单的回复，变更和协调；另一方面就是出货和物流。</p>
+                    <p th:text="#{index.Q15}">Q15. 按照您和崇达的接触经验，请问您对它在<strong>供货服务</strong>表现的满意程度如何呢？您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.ghhjd}">供货环节的总体满意度</td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_allsupply_satisfaction" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q16}">Q16. 下面是一些关于<strong>供货服务各方面</strong>方面的具体描述，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.swfzrdfwtd}">商务负责人的服务态度</td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_service_attitude" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">02</td>
+                            <td th:text="#{index.swfzrdclnl}">商务负责人的处理能力</td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_business_capability" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">03</td>
+                            <td th:text="#{index.jqsz}">交期设置</td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_delivery_date_setting" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">04</td>
+                            <td th:text="#{index.ddjhzsx}">订单交货准时性</td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_order_delivery_punctuality" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">05</td>
+                            <td th:text="#{index.ypyfbdxysd}">样品/研发板供货的响应速度</td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_research_development_speed" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">06</td>
+                            <td th:text="#{index.ypyfbdmzcd}">样品/研发板供货的满足程度</td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_supply_satisfaction" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <h3 th:text="#{index.E}">E. 售后服务</h3>
+                    <p th:text="#{index.Ex}">
+                        面我想和您谈一下有关崇达售后服务方面的一些问题。我们这里说的售后服务，主要指产品批量生产过程中或者用户在产品使用过程中涉及压缩机的某些技术质量问题的处理过程，我们称这个过程为售后服务</p>
+                    <p th:text="#{index.Q17}">Q17. 按照您和崇达的接触经验，请问您对它在<strong>售后服务</strong>表现的满意程度如何呢？您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.shfwd}">售后服务的总体满意度</td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_all_aftSales_satisfaction" value="-1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q18}">Q18. 下面是一些关于<strong>售后服务各方面</strong>方面的具体描述，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。
+                    </p>
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.kfryzyx}">客服人员专业性</td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_professionalism" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">02</td>
+                            <td th:text="#{index.kfrywdx}">客服人员稳定性</td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_customer_service_stability" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">03</td>
+                            <td th:text="#{index.xcdfywtdqd}">向崇达反映问题的渠道</td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_reflection_channel" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">04</td>
+                            <td th:text="#{index.cddwtdxysd}">崇达对问题的响应速度</td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_problem_response_speed" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">05</td>
+                            <td th:text="#{index.rcdpzjs}">日常的品质技术交流频率</td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_tecexchange_frequency" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">06</td>
+                            <td th:text="#{index.cdgggsdpz}">崇达给贵公司的品质改善提供了帮助</td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_help_provided" value="-1"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">07</td>
+                            <td th:text="#{index.jzhyfcs}">纠正或预防措施（防止再次发生同样的问题）</td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_correct_errors" value="-1"/></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div><!-- 第三部分	价值感知与背景信息 -->
+                    <br/><br/>
+                    <h2 th:text="#{index.dsbf}">第三部分 价值感知与背景信息</h2>
+                    <h3 th:text="#{index.jzgz}">价值感知 </h3>
+                    <p th:text="#{index.Q19}">Q19. 【单选】简单从采购金额看，贵公司每年向崇达采购线路板的金额约占年度线路板采购总金额的多大比例？</p>
+                    <table class="table2" border="1">
+                        <tr>
+                            <td>90-100%</td>
+                            <td width="30px"><input class="che" type="checkbox" name="fra_purchase_proportion" value="10"/></td>
+                            <td>40-49%</td>
+                            <td width="30px"><input class="che" type="checkbox" name="fra_purchase_proportion" value="5"/></td>
+                        </tr>
+                        <tr>
+                            <td>80-89%</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="9"/></td>
+                            <td>30-39%</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="4"/></td>
+                        </tr>
+                        <tr>
+                            <td>70-79%</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="8"/></td>
+                            <td>20-29%</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="3"/></td>
+                        </tr>
+                        <tr>
+                            <td>60-69%</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="7"/></td>
+                            <td>10-19%</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="2"/></td>
+                        </tr>
+                        <tr>
+                            <td>50-59%</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="6"/></td>
+                            <td th:text="#{index.bfz10}">10%以下</td>
+                            <td><input class="che" type="checkbox" name="fra_purchase_proportion" value="1"/></td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q20}">Q20. 【可多选】贵公司目前需求量最大的PCB产品集中在几层板？</p>
+                    <p class="duoxuan">
+                        <input class="che1" type="checkbox" name="demand_sheet" value="单双面板"/><span
+                            th:text="#{index.dsmb}">单双面板</span>
+                        <input class="che1" type="checkbox" name="demand_sheet" value="四层板"/><span
+                            th:text="#{index.scb}">四层板</span>
+                        <input class="che1" type="checkbox" name="demand_sheet" value="六层板"/><span
+                            th:text="#{index.lcb}">六层板</span>
+                        <input class="che1" type="checkbox" name="demand_sheet" value="八层板"/><span
+                            th:text="#{index.bcb}">八层板</span>
+                        <input class="che1" type="checkbox" name="demand_sheet" value="十层及十层以上板"/><span
+                            th:text="#{index.scjys}">十层及十层以上板</span>
+                        <input class="che1" type="checkbox" name="demand_sheet" value="HDI"/><span>HDI</span>
+                        <input class="che1" type="checkbox" name="demand_sheet" value="柔性版或刚挠结合"/><span
+                            th:text="#{index.rxbhgrjh}">柔性版或刚挠结合</span>
+                    </p>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q22}">Q21. 贵公司对崇达对有害物质管控的满意度，请按照您和崇达的接触经验，您可以用1-10分中的任何一个分数来表达您的满意程度，10是非常满意，1是无法接受。</p>
+                    <p class="duoxuan">
+                    <table class="table1" border="1">
+                        <tr>
+                            <th colspan="2" th:text="#{index.myd}">满意度</th>
+                            <th class="result">10</th>
+                            <th class="result">9</th>
+                            <th class="result">8</th>
+                            <th class="result">7</th>
+                            <th class="result">6</th>
+                            <th class="result">5</th>
+                            <th class="result">4</th>
+                            <th class="result">3</th>
+                            <th class="result">2</th>
+                            <th class="result">1</th>
+                            <th class="result3" th:text="#{index.bzdbsy}">不知道/不适用</th>
+                            <th class="result2" th:text="#{index.jd}">拒答</th>
+                        </tr>
+                        <tr>
+                            <td align="center">01</td>
+                            <td th:text="#{index.yhwzztmyd}">有害物质管控的总体满意度</td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="10"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="9"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="8"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="7"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="6"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="5"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="4"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="3"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="2"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="1"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="0"/></td>
+                            <td><input class="che" type="checkbox" name="fra_hazardous_materials" value="-1"/></td>
+                        </tr>
+                    </table>
+                    </p>
+
+                    <br/><br/>
+                    <p th:text="#{index.Q21}">Q22. 如果您对崇达各个方面有任何意见或建议，请留下您宝贵的反馈。</p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.cpzl}">产品质量：</span> <span class="yj"><input type="text"
+                                                                                                          name="opinion_product_quality"
+                                                                                                          value=""/></span>
+                    </p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.xcpclyf}">新产品/材料研发：</span> <span class="yj"><input type="text"
+                                                                                                                 name="opinion_new_product"
+                                                                                                                 value=""/></span>
+                    </p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.sqjsfw2}">售前技术服务：</span> <span class="yj"><input type="text"
+                                                                                                               name="opinion_presales_tecservice"
+                                                                                                               value=""/></span>
+                    </p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.xsfw}">销售服务：</span> <span class="yj"><input type="text"
+                                                                                                          name="opinion_sales_service"
+                                                                                                          value=""/></span>
+                    </p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.ghhj}">供货环节：</span> <span class="yj"><input type="text"
+                                                                                                          name="opinion_supply_link"
+                                                                                                          value=""/></span>
+                    </p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.shfw}">售后服务：</span> <span class="yj"><input type="text"
+                                                                                                          name="opinion_after_sale_service"
+                                                                                                          value=""/></span>
+                    </p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.cwhj}">财务环节：</span> <span class="yj"><input type="text"
+                                                                                                          name="opinion_financial_link"
+                                                                                                          value=""/></span>
+                    </p>
+                    <p class="yijian">
+                        <span class="yjspan" th:text="#{index.qtfm}">其他方面：</span> <span class="yj"><input type="text"
+                                                                                                          name="opinion_other_aspects"
+                                                                                                          value=""/></span>
+                    </p>
+                </div>
+                <br/><br/>
+                <p class="bc">
+                    <input type="submit" class="submit" value="提交" th:value="#{index.btn}" th:onclick="save()"/>
+                </p>
+                <div><!-- 尾言 -->
+                    <br/><br/>
+                    <p id="wyp" th:text="#{index.wy}">感谢您的耐心作答，对您的宝贵意见，我们必定在日后的工作中尽力改善，努力实现“满意百分百”！</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

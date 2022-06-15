@@ -1,0 +1,153 @@
+*{
+    color: #5B4134;
+}
+body {
+    width: 54%;
+    margin: 100px auto;
+    border: solid #E9E1D6 1px;
+    border-radius: 15px;
+    min-width: 560px;
+    background-color: #f4f4f4;
+}
+.border1{
+    border-radius: 15px;
+    background-color: white;
+    padding: 10px 2%;
+}
+
+.title {
+    text-align: center;
+}
+#title1{
+    text-align: center;
+   font-size: 50PX;
+    margin-bottom: 1px;
+}
+#title2{
+    text-align: center;
+    font-size: 24PX;
+    margin-top: 0px;;
+}
+
+.qt {
+    display: none;
+}
+
+.table1, .table2 {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table1 .result {
+    min-width: 24px;
+    width: 30px;
+}
+
+.table1 tr {
+    height: 30px;
+}
+
+.table1 td,
+.table th {
+    margin: 0px;
+    padding: 0px;
+}
+
+.table1 th {
+    background-color: #B1A58F;
+}
+
+.table1 td {
+    font-size: 13px;
+}
+
+.table1 .che {
+    width: 30px;
+    height: 100%;
+    margin: 2px 0px 0px 0px;
+    height: 30px;
+    width: 100%;
+}
+
+.table1 .result2 {
+    width: 36px;
+}
+
+.table1 .result3 {
+    width: 82px;
+}
+
+.table1 tr td:nth-of-type(1) {
+    width: 40px;
+}
+
+.table2 .che {
+    width: 30px;
+    margin: 0px;
+    height: 30px;
+}
+
+#from .che1 {
+    width: 21px;
+    margin: 0px;
+    height: 21px;
+}
+
+#from .duoxuan span {
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    margin: 0px 4px;
+}
+
+#from .yijian {
+    width: 100%;
+}
+
+#from .yijian .yj {
+    border-bottom: 1px solid black;
+    display: inline-block;
+    width: 85%;
+}
+
+#from .yijian .yj input {
+    width: 100%;
+    border: none;
+    outline: medium;
+}
+
+#from .yjspan {
+    width: 14%;
+    display: inline-block;
+}
+
+#wyp {
+    padding: 10px;
+    border: 1px solid darkseagreen;
+}
+
+#from .submit {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 8px 20px;
+    background-color: #e5cab2;
+}
+.bc{
+    text-align: center;
+}
+.cost .costt {
+    width: 20%;
+}
+
+.cost .costs {
+    display: inline-block;
+    width: 80%;
+    border-bottom: solid black 1px;
+}
+
+.cost .costi {
+    font-size: 18px;
+    outline: medium;
+    border: none;
+    width: 100%;
+}

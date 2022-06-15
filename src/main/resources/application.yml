@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: pro
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    cache: true
+  devtools:
+    remote:
+      restart:
+        enabled: true
+  messages:
+    basename: i18n/index
+    encoding: UTF-8
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.example.questionnaire.dao
+server:
+  port: 8888
+  servlet:
+    context-path: /questionnaire
+#logging:
+#  file:
+#    path: E:\idea\log
