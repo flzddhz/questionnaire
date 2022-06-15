@@ -1,7 +1,7 @@
 package com.example.questionnaire.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import javafx.scene.chart.ValueAxis;
+//import javafx.scene.chart.ValueAxis;
 import lombok.Data;
 
 import java.sql.Date;

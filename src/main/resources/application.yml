@@ -18,8 +18,8 @@ mybatis-plus:
   type-aliases-package: com.example.questionnaire.dao
 server:
   port: 8888
-  servlet:
-    context-path: /questionnaire
+#  servlet:
+#    context-path: /questionnaire
 #logging:
 #  file:
 #    path: E:\idea\log
