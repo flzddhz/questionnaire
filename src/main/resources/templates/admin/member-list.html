@@ -42,7 +42,10 @@
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除
                     </button>
                     <button class="layui-btn" onclick="xadmin.open('添加客户','/tomemberadd',600,400)"><i
-                            class="layui-icon"></i>添加
+                        class="layui-icon"></i>添加
+                    </button>
+                    <button type="button" class="layui-btn" onclick="toEmail()">
+                        <i class="layui-icon layui-icon-release"></i>发送邮件
                     </button>
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
@@ -191,6 +194,15 @@
             $.post("/delAllAccount", {ids: ids.toString()}, function (data) {
                 layer.msg('删除成功', {icon: 1});
                 $(".layui-form-checked").not('.header').parents('tr').remove();
+            });
+        });
+    }
+    
+    function toEmail() {
+        layer.confirm('确认要发送邮件吗？', function (index) {
+            //发异步删除数据
+            $.post("/sendEmail", function (data) {
+                layer.msg('已发送!', {icon: 1, time: 1000});
             });
         });
     }

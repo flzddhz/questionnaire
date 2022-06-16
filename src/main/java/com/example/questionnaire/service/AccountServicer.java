@@ -16,4 +16,6 @@ public interface AccountServicer {
 
     int delAccount(Account account);
 
+    List<Account> queryAllAccount();
+
 }

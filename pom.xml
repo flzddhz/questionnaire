@@ -71,6 +71,18 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+        <!-- email -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

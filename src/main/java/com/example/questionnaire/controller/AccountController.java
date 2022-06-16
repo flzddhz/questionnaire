@@ -2,12 +2,14 @@ package com.example.questionnaire.controller;
 
 import com.example.questionnaire.entity.Account;
 import com.example.questionnaire.service.AccountServicer;
+import com.example.questionnaire.utils.EmailUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -69,5 +71,18 @@ public class AccountController {
             account.setId(Integer.valueOf(ids.split(",")[i]));
             accountServicer.delAccount(account);
         }
+    }
+    @ResponseBody
+    @RequestMapping("sendEmail")
+    public void sendEmail(String emails){
+        if (emails == null) {
+            List<Account> list = accountServicer.queryAllAccount();
+            System.out.println("list.size() ========" + list.size());
+            for (Account acc:list){
+                emails = emails + acc.getEmail() + ",";
+            }
+        }
+        EmailUtils emailUtils = new EmailUtils();
+        emailUtils.senEmail("www.4399.com");
     }
 }
